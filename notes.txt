@@ -1,0 +1,8 @@
+Realizar una aplicacion de mensajes.
+
+El usuario deberia loguearse con su correo de gmail y poder crear correos que se manden de manera automatica en distintos horarios a distintas personas.
+
+El usuario puede crear distintas categorias para luego filtrar en un historial
+
+Se le puede asignar a una persona mas de 1 mensajes
+
