@@ -35,4 +35,39 @@ const createUser = async (email) => {
     return newUser
 }
 
-module.exports = { postCategory , deleteCategory, getAllCategories, getUserData, createUser}
+const postEmail = async (UserId, title, body, sendTo, date, CategoryId) => {
+    const newEmail = await Email.create({
+        title,
+        body,
+        sendTo,
+        date,
+        UserId,
+        CategoryId
+    })
+    return newEmail
+}
+
+const getEmailById = async (id) => {
+    const email = await Email.findByPk(id)
+    return email
+}
+
+const deleteEmail = async (id) => {
+    const emailToDelete = await Email.findByPk(id)
+    await emailToDelete.destroy()
+    return "Correo eliminado";
+}
+
+const putEmail = async (id, title, body, sendTo, date, CategoryId) => {
+    const emailToUpdate = await Email.findByPk(id)
+    await emailToUpdate.update({
+        title,
+        body,
+        sendTo,
+        date,
+        CategoryId
+    })
+    return emailToUpdate
+}
+
+module.exports = { postCategory , deleteCategory, getAllCategories, getUserData, createUser, postEmail, getEmailById, deleteEmail, putEmail}
