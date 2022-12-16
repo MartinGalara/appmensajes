@@ -1,4 +1,4 @@
-const { Category } = require('../utils/database.js')
+const { Category, User, Email } = require('../utils/database.js')
 
 const postCategory = async (name) => {
     const newCategory = await Category.create({name: name})
@@ -16,4 +16,23 @@ const getAllCategories = async () => {
     return allCategories;
 }
 
-module.exports = { postCategory , deleteCategory, getAllCategories}
+const getUserData = async (email) => {
+    const userData = await User.findAll({
+    where:{
+        email: email
+    },
+    include:{
+        model: Email,
+        include:{
+            model: Category
+        }
+    }})
+    return userData
+}
+
+const createUser = async (email) => {
+    const newUser = await User.create({email:email})
+    return newUser
+}
+
+module.exports = { postCategory , deleteCategory, getAllCategories, getUserData, createUser}
