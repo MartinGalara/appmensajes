@@ -35,7 +35,7 @@ let sequelize = process.env.NODE_ENV === 'production'
 
 const modelDefiners = [];
 
-let models = "src/models"
+/*let models = "src/models"
 
 let modelsPath = "";
 
@@ -45,18 +45,16 @@ fs.readdirSync("src").map( e => {
   }
 })
 
-
 fs.readdirSync(models)
 .filter((file) => (file.indexOf('.') !== 0) && (file.slice(-3) === '.js'))
 .forEach((file) => {
   modelDefiners.push(path.join(modelsPath, file));
-});
+});*/
 
-let a = 'C:\\Users\\Martin\\Desktop\\HENRY\\appmensajes\\src\\models\\Category.js'
+modelDefiners.push(require('../models/Category.js'))
+modelDefiners.push(require('../models/Email.js'))
+modelDefiners.push(require('../models/User.js'))
 
-let b = require(a)
-console.log(b)
-/*
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
@@ -66,15 +64,16 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category , Email } = sequelize.models;
+const { Category , Email , User} = sequelize.models;
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-*/
 
-/*Videogame.belongsToMany(Genre, {through: 'Videogames_Genres'});
-Genre.belongsToMany(Videogame, {through: 'Videogames_Genres'});
-*/
+User.hasMany(Email);
+Email.belongsTo(User);
+
+Email.belongsTo(Category);
+Category.hasMany(Email);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

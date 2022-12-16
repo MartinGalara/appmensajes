@@ -3,6 +3,8 @@ import {conn} from "../../utils/database.js"
 
 export default async (req, res) => {
 
+conn.sync({ force: false })
+
  const response = await conn.query("SELECT NOW()")
 
  return res.json({message:"pong",time:response[0][0].now})

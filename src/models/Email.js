@@ -1,22 +1,25 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('email', {
-        name: {
+    sequelize.define('Email', {
+        title: {
+            type: DataTypes.STRING,
+        },
+        body: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        hour: {
+        sendTo: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        day: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
+        date:{
+            type: DataTypes.DATE,
+        }
+
     },
         {
-            paranoid: true,
+            timestamps: false,
         }
     )
 }
